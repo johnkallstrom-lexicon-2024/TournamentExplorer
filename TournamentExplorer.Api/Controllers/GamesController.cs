@@ -4,9 +4,9 @@ namespace TournamentExplorer.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TournamentsController : ControllerBase
+    public class GamesController : ControllerBase
     {
         [HttpGet]
-        public ActionResult Ping() => Ok(nameof(TournamentsController));
+        public ActionResult Ping() => Ok(nameof(GamesController));
     }
 }
