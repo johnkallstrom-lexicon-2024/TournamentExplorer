@@ -1,1 +1,1 @@
-# TournamentExplorer
+# Tournament Explorer
