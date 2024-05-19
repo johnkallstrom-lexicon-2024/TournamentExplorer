@@ -7,11 +7,8 @@
         Icehockey,
         Videogame,
         Chess,
-        Floorball,
         Tennis,
         Golf,
         Volleyball,
-        Cricket,
-        Boule
     }
 }
