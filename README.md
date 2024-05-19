@@ -1,17 +1,14 @@
 # Tournament Explorer
 
 ### Getting started
-launchBrowser is set to false
+Use Visual Studio and all will be well...👾
 
-##### Visual Studio
 1. Clone project
 2. Open the .sln-file
-3. Press green start button in Visual Studio
+3. Run `Update-Database` in Package Manager Console to apply all migrations
+4. Start the application
 
-##### Terminal
-1. Clone project
-3. Navigate to TournamentExplorer.Api
-4. Use `dotnet run` in your terminal
+launchBrowser is set to false. Will be listening to `https://localhost:4000`.
 
 ##### Postman
 - [Tournament Explorer Postman Collection](docs/Postman/TournamentExplorerPostmanCollection.json)
