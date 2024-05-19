@@ -3,7 +3,7 @@
 ### Getting started
 launchBrowser is set to false
 
-#### Visual Studio
+##### Visual Studio
 1. Clone project
 2. Open the .sln-file
 3. Press green start button in Visual Studio
