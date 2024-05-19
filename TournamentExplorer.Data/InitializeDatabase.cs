@@ -50,51 +50,20 @@ namespace TournamentExplorer.Data
 
         public static IEnumerable<Tournament> GenerateTournaments()
         {
+            var tournaments = new List<Tournament>();
             var tournamentTypesLength = Enum.GetValues<TournamentType>().Length;
 
-            var tournaments = new List<Tournament>
+            for (int i = 1; i <= 5; i++)
             {
-                new Tournament
+                tournaments.Add(new Tournament
                 {
-                    Title = "Tournament One",
-                    Description = _faker.Lorem.Paragraphs(),
+                    Title = $"Tournament {i}",
+                    Description = _faker.Commerce.ProductDescription(),
                     Location = _faker.Address.FullAddress(),
                     StartDate = DateTime.Now,
                     Type = (TournamentType)new Random().Next(0, (tournamentTypesLength - 1)),
-                },
-                new Tournament
-                {
-                    Title = "Tournament Two",
-                    Description = _faker.Lorem.Paragraphs(),
-                    Location = _faker.Address.FullAddress(),
-                    StartDate = DateTime.Now,
-                    Type = (TournamentType)new Random().Next(0, (tournamentTypesLength - 1)),
-                },
-                new Tournament
-                {
-                    Title = "Tournament Three",
-                    Description = _faker.Lorem.Paragraphs(),
-                    Location = _faker.Address.FullAddress(),
-                    StartDate = DateTime.Now,
-                    Type = (TournamentType)new Random().Next(0, (tournamentTypesLength - 1)),
-                },
-                new Tournament
-                {
-                    Title = "Tournament Four",
-                    Description = _faker.Lorem.Paragraphs(),
-                    Location = _faker.Address.FullAddress(),
-                    StartDate = DateTime.Now,
-                    Type = (TournamentType)new Random().Next(0, (tournamentTypesLength - 1)),
-                },
-                new Tournament
-                {
-                    Title = "Tournament Five",
-                    Description = _faker.Lorem.Paragraphs(),
-                    Location = _faker.Address.FullAddress(),
-                    StartDate = DateTime.Now,
-                    Type = (TournamentType)new Random().Next(0, (tournamentTypesLength - 1)),
-                },
-            };
+                });
+            }
 
             return tournaments;
         }
