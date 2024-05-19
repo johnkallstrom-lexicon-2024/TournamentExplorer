@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TournamentExplorer.Core.Contracts;
+using TournamentExplorer.Api.Models;
+using AutoMapper;
 
 namespace TournamentExplorer.Api.Controllers
 {
@@ -6,7 +9,22 @@ namespace TournamentExplorer.Api.Controllers
     [ApiController]
     public class TournamentsController : ControllerBase
     {
+        private readonly IMapper _mapper;
+        private readonly ITournamentRepository _tournamentRepository;
+
+        public TournamentsController(ITournamentRepository tournamentRepository, IMapper mapper)
+        {
+            _tournamentRepository = tournamentRepository;
+            _mapper = mapper;
+        }
+
         [HttpGet]
-        public ActionResult Ping() => Ok(nameof(TournamentsController));
+        public async Task<ActionResult> GetAllTournaments()
+        {
+            var tournaments = await _tournamentRepository.GetAllAsync();
+            var dtos = _mapper.Map<IEnumerable<TournamentSlimDto>>(tournaments);
+
+            return Ok(dtos);
+        }
     }
 }
