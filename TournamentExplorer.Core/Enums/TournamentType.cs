@@ -2,13 +2,11 @@
 {
     public enum TournamentType
     {
-        Boardgame,
-        Soccer,
+        Football,
         Icehockey,
-        Videogame,
-        Chess,
-        Tennis,
-        Golf,
+        Poker,
         Volleyball,
+        Golf,
+        Tennis,
     }
 }
