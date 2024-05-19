@@ -68,7 +68,7 @@
 					"response": []
 				},
 				{
-					"name": "Get",
+					"name": "Get With Games",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -78,7 +78,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://localhost:{{port}}/api/Tournaments/3",
+							"raw": "https://localhost:{{port}}/api/Tournaments/5?includeGames=true",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -87,7 +87,13 @@
 							"path": [
 								"api",
 								"Tournaments",
-								"3"
+								"5"
+							],
+							"query": [
+								{
+									"key": "includeGames",
+									"value": "true"
+								}
 							]
 						}
 					},
