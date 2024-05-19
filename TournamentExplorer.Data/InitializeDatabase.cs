@@ -32,13 +32,19 @@ namespace TournamentExplorer.Data
 
             foreach (var tournament in tournaments)
             {
-                for (int i = 1; i <= _faker.Random.Int(min: 1, max: 5); i++)
+                int duration = GetGameDuration(tournament.Type);
+
+                for (int i = 1; i <= _faker.Random.Int(min: 1, max: 7); i++)
                 {
+                    var year = tournament.StartDate.Year;
+                    var month = tournament.StartDate.Month;
+                    var day = tournament.StartDate.AddDays(_faker.Random.Int(min: 1, max: 10)).Day;
+
                     games.Add(new Game
                     {
-                        Name = $"{tournament.Type} Game",
-                        Time = tournament.StartDate.AddDays(_faker.Random.Int(min: 1, max: 7)),
-                        Duration = _faker.Random.Int(min: 30, max: 120),
+                        Name = $"Game {i}",
+                        Time = new DateTime(year, month, day),
+                        Duration = duration,
                         TournamentId = tournament.Id,
                         Tournament = tournament
                     });
@@ -51,21 +57,47 @@ namespace TournamentExplorer.Data
         public static IEnumerable<Tournament> GenerateTournaments()
         {
             var tournaments = new List<Tournament>();
-            var tournamentTypesLength = Enum.GetValues<TournamentType>().Length;
 
-            for (int i = 1; i <= 5; i++)
+            var year = DateTime.Now.Year;
+            var nextMonth = DateTime.Now.AddMonths(1).Month;
+            var startDate = new DateTime(year, nextMonth, day: 1, hour: 10, minute: 00, second: 00);
+
+            var tournamentTypes = Enum.GetValues<TournamentType>();
+
+            for (int i = 0; i < tournamentTypes.Length; i++)
             {
                 tournaments.Add(new Tournament
                 {
-                    Title = $"Tournament {i}",
-                    Description = _faker.Commerce.ProductDescription(),
-                    Location = _faker.Address.FullAddress(),
-                    StartDate = DateTime.Now,
-                    Type = (TournamentType)new Random().Next(0, (tournamentTypesLength - 1)),
+                    Title = $"{tournamentTypes[i]} Tournament",
+                    StartDate = startDate,
+                    City = _faker.Address.City(),
+                    Country = _faker.Address.Country(),
+                    Type = tournamentTypes[i],
                 });
             }
 
             return tournaments;
+        }
+
+        public static int GetGameDuration(TournamentType type)
+        {
+            switch (type)
+            {
+                case TournamentType.Football:
+                    return 90;
+                case TournamentType.Icehockey:
+                    return 60;
+                case TournamentType.Poker:
+                    return 120;
+                case TournamentType.Volleyball:
+                    return 90;
+                case TournamentType.Golf:
+                    return 240;
+                case TournamentType.Tennis:
+                    return 120;
+                default:
+                    return 60;
+            }
         }
     }
 }
