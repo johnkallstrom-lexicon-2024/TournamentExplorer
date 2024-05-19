@@ -26,5 +26,18 @@ namespace TournamentExplorer.Api.Controllers
 
             return Ok(dtos);
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetTournament(int id, [FromQuery] bool includeGames = true)
+        {
+            var tournament = await _tournamentRepository.GetAsync(id, includeGames);
+            if (tournament is null)
+            {
+                return NotFound();
+            }
+
+            var dto = _mapper.Map<TournamentDto>(tournament);
+            return Ok(dto);
+        }
     }
 }
