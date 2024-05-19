@@ -1,4 +1,4 @@
-﻿namespace TournamentExplorer.Core.Models
+﻿namespace TournamentExplorer.Api.Models
 {
     public class TournamentDto
     {
