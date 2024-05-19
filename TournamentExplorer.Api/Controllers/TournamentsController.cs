@@ -28,7 +28,7 @@ namespace TournamentExplorer.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetTournament(int id, [FromQuery] bool includeGames = true)
+        public async Task<ActionResult> GetTournament(int id, [FromQuery] bool includeGames)
         {
             var tournament = await _tournamentRepository.GetAsync(id, includeGames);
             if (tournament is null)
