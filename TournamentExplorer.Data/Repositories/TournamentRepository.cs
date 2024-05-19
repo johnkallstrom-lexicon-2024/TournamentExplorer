@@ -1,10 +1,18 @@
-﻿using TournamentExplorer.Core.Contracts;
+﻿using Microsoft.EntityFrameworkCore;
+using TournamentExplorer.Core.Contracts;
 using TournamentExplorer.Core.Entities;
 
 namespace TournamentExplorer.Data.Repositories
 {
     public class TournamentRepository : ITournamentRepository
     {
+        private readonly TournamentExplorerDbContext _context;
+
+        public TournamentRepository(TournamentExplorerDbContext context)
+        {
+            _context = context;
+        }
+
         public Task<bool> AnyAsync()
         {
             throw new NotImplementedException();
@@ -20,14 +28,29 @@ namespace TournamentExplorer.Data.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Tournament>> GetAllAsync()
+        public async Task<IEnumerable<Tournament>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var tournaments = await _context.Tournaments.ToListAsync();
+            return tournaments;
         }
 
-        public Task<Tournament> GetAsync(int id, bool includeGames)
+        public async Task<Tournament?> GetAsync(int id, bool includeGames)
         {
-            throw new NotImplementedException();
+            Tournament? tournament = null;
+            if (includeGames)
+            {
+                tournament = await _context.Tournaments
+                    .Include(t => t.Games)
+                    .FirstOrDefaultAsync(t => t.Id == id);
+
+                return tournament;
+            }
+            else
+            {
+                tournament = await _context.Tournaments.FirstOrDefaultAsync(t => t.Id == id);
+            }
+
+            return tournament;
         }
 
         public Task UpdateAsync(Tournament tournament)
