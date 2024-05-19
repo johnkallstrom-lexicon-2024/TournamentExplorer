@@ -1,4 +1,5 @@
-﻿using TournamentExplorer.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using TournamentExplorer.Data;
 
 namespace TournamentExplorer.Api.Extensions
 {
@@ -9,6 +10,10 @@ namespace TournamentExplorer.Api.Extensions
             using (var scope = app.Services.CreateScope())
             {
                 var context = scope.ServiceProvider.GetRequiredService<TournamentExplorerDbContext>();
+
+                await context.Database.EnsureDeletedAsync();
+                await context.Database.MigrateAsync();
+
                 await InitializeDatabase.SeedAsync(context);
             }
         }
