@@ -3,9 +3,10 @@
     public class GameDto
     {
         public int Id { get; set; }
-        public string? Title { get; set; }
+        public string? Name { get; set; }
         public DateTime Time { get; set; }
+        public int Duration { get; set; }
 
-        public TournamentDto Tournament { get; set; } = default!;
+        public TournamentWithoutRelationsDto Tournament { get; set; } = default!;
     }
 }

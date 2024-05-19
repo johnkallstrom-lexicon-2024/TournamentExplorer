@@ -2,7 +2,7 @@
 
 namespace TournamentExplorer.Api.Models
 {
-    public class TournamentDto
+    public class TournamentWithoutRelationsDto
     {
         public int Id { get; set; }
         public string Title { get; set; } = default!;
@@ -10,7 +10,5 @@ namespace TournamentExplorer.Api.Models
         public string Location { get; set; } = default!;
         public DateTime StartDate { get; set; }
         public TournamentType Type { get; set; }
-
-        public IEnumerable<GameWithoutRelationsDto> Games { get; set; } = new List<GameWithoutRelationsDto>();
     }
 }

@@ -9,10 +9,10 @@ namespace TournamentExplorer.Api.Mappings
         public MappingProfile()
         {
             CreateMap<Tournament, TournamentDto>();
-            CreateMap<Tournament, TournamentSlimDto>();
+            CreateMap<Tournament, TournamentWithoutRelationsDto>();
 
             CreateMap<Game, GameDto>();
-            CreateMap<Game, GameSlimDto>();
+            CreateMap<Game, GameWithoutRelationsDto>();
         }
     }
 }

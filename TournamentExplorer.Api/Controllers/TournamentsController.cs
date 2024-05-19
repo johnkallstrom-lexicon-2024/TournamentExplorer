@@ -22,7 +22,7 @@ namespace TournamentExplorer.Api.Controllers
         public async Task<ActionResult> GetAllTournaments()
         {
             var tournaments = await _tournamentRepository.GetAllAsync();
-            var dtos = _mapper.Map<IEnumerable<TournamentSlimDto>>(tournaments);
+            var dtos = _mapper.Map<IEnumerable<TournamentWithoutRelationsDto>>(tournaments);
 
             return Ok(dtos);
         }
