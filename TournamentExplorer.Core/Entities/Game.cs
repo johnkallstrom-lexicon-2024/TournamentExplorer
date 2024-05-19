@@ -7,8 +7,9 @@ namespace TournamentExplorer.Core.Entities
     {
         [Key]
         public int Id { get; set; }
-        public string Title { get; set; } = default!;
+        public string Name { get; set; } = default!;
         public DateTime Time { get; set; }
+        public int Duration { get; set; }
 
         [ForeignKey("TournamentId")]
         public int TournamentId { get; set; }
