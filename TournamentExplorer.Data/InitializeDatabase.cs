@@ -66,9 +66,10 @@ namespace TournamentExplorer.Data
 
             for (int i = 0; i < tournamentTypes.Length; i++)
             {
+                int count = i + 1;
                 tournaments.Add(new Tournament
                 {
-                    Title = $"{tournamentTypes[i]} Tournament",
+                    Title = $"Tournament {count}",
                     StartDate = startDate,
                     City = _faker.Address.City(),
                     Country = _faker.Address.Country(),
