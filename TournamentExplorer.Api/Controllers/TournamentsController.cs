@@ -42,7 +42,7 @@ namespace TournamentExplorer.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateTournament([FromBody] TournamentForCreationDto dto)
+        public async Task<ActionResult> CreateTournament([FromBody] TournamentForCreateDto dto)
         {
             var tournament = _mapper.Map<Tournament>(dto);
 
@@ -53,6 +53,38 @@ namespace TournamentExplorer.Api.Controllers
                 nameof(GetTournament), 
                 new { createdTournament.Id }, 
                 createdTournament);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdateTournament(int id, [FromBody] TournamentForUpdateDto dto)
+        {
+            var tournament = await _unitOfWork.TournamentRepository.GetAsync(id);
+            if (tournament is null)
+            {
+                return NotFound();
+            }
+
+            tournament = _mapper.Map(source: dto, destination: tournament);
+
+            _unitOfWork.TournamentRepository.Update(tournament);
+            await _unitOfWork.CompleteAsync();
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteTournament(int id)
+        {
+            var tournament = await _unitOfWork.TournamentRepository.GetAsync(id);
+            if (tournament is null)
+            {
+                return NotFound();
+            }
+
+            _unitOfWork.TournamentRepository.Delete(tournament);
+            await _unitOfWork.CompleteAsync();
+
+            return NoContent();
         }
     }
 }

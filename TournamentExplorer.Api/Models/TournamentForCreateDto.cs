@@ -2,7 +2,7 @@
 
 namespace TournamentExplorer.Api.Models
 {
-    public class TournamentForCreationDto
+    public class TournamentForCreateDto
     {
         public string Title { get; set; } = default!;
         public DateTime StartDate { get; set; }

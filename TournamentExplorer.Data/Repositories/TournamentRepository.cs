@@ -41,7 +41,7 @@ namespace TournamentExplorer.Data.Repositories
             return tournaments;
         }
 
-        public async Task<Tournament?> GetAsync(int id, bool includeGames)
+        public async Task<Tournament?> GetAsync(int id, bool includeGames = false)
         {
             Tournament? tournament = null;
             if (includeGames)

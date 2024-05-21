@@ -10,7 +10,7 @@ namespace TournamentExplorer.Api.Mappings
         {
             CreateMap<Tournament, TournamentDto>();
             CreateMap<Tournament, TournamentWithoutRelationsDto>();
-            CreateMap<TournamentForCreationDto, Tournament>();
+            CreateMap<TournamentForCreateDto, Tournament>();
 
             CreateMap<Game, GameDto>();
             CreateMap<Game, GameWithoutRelationsDto>();
