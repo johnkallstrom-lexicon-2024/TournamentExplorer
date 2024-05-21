@@ -4,7 +4,11 @@ using TournamentExplorer.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(config =>
+{
+    config.ReturnHttpNotAcceptable = true;
+});
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDataServices(builder.Configuration);
@@ -14,7 +18,7 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    await app.SeedDatabase();
+    //await app.SeedDatabase();
 
     app.UseSwagger();
     app.UseSwaggerUI();
