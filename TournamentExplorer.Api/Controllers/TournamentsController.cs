@@ -2,6 +2,7 @@
 using TournamentExplorer.Core.Contracts;
 using TournamentExplorer.Api.Models;
 using AutoMapper;
+using TournamentExplorer.Core.Entities;
 
 namespace TournamentExplorer.Api.Controllers
 {
@@ -10,18 +11,18 @@ namespace TournamentExplorer.Api.Controllers
     public class TournamentsController : ControllerBase
     {
         private readonly IMapper _mapper;
-        private readonly ITournamentRepository _tournamentRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public TournamentsController(ITournamentRepository tournamentRepository, IMapper mapper)
+        public TournamentsController(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            _tournamentRepository = tournamentRepository;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
         [HttpGet]
         public async Task<ActionResult> GetAllTournaments()
         {
-            var tournaments = await _tournamentRepository.GetAllAsync();
+            var tournaments = await _unitOfWork.TournamentRepository.GetAllAsync();
             var dtos = _mapper.Map<IEnumerable<TournamentWithoutRelationsDto>>(tournaments);
 
             return Ok(dtos);
@@ -30,7 +31,7 @@ namespace TournamentExplorer.Api.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult> GetTournament(int id, [FromQuery] bool includeGames)
         {
-            var tournament = await _tournamentRepository.GetAsync(id, includeGames);
+            var tournament = await _unitOfWork.TournamentRepository.GetAsync(id, includeGames);
             if (tournament is null)
             {
                 return NotFound();
@@ -38,6 +39,20 @@ namespace TournamentExplorer.Api.Controllers
 
             var dto = _mapper.Map<TournamentDto>(tournament);
             return Ok(dto);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> CreateTournament([FromBody] TournamentForCreationDto dto)
+        {
+            var tournament = _mapper.Map<Tournament>(dto);
+
+            var createdTournament = await _unitOfWork.TournamentRepository.CreateAsync(tournament);
+            await _unitOfWork.CompleteAsync();
+
+            return CreatedAtAction(
+                nameof(GetTournament), 
+                new { createdTournament.Id }, 
+                createdTournament);
         }
     }
 }

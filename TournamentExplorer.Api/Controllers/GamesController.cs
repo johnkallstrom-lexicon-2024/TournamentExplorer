@@ -7,6 +7,9 @@ namespace TournamentExplorer.Api.Controllers
     public class GamesController : ControllerBase
     {
         [HttpGet]
-        public ActionResult Ping() => Ok(nameof(GamesController));
+        public async Task<ActionResult> GetAllGames()
+        {
+            return Ok();
+        }
     }
 }
