@@ -1,11 +1,9 @@
 using System.Reflection;
-using TournamentExplorer.Api.Extensions;
 using TournamentExplorer.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDataServices(builder.Configuration);
