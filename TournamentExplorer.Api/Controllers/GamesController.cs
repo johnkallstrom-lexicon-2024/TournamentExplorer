@@ -6,10 +6,5 @@ namespace TournamentExplorer.Api.Controllers
     [ApiController]
     public class GamesController : ControllerBase
     {
-        [HttpGet]
-        public async Task<ActionResult> GetAllGames()
-        {
-            return Ok();
-        }
     }
 }

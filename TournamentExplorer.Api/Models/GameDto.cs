@@ -6,7 +6,5 @@
         public string? Name { get; set; }
         public DateTime Time { get; set; }
         public int Duration { get; set; }
-
-        public TournamentWithoutRelationsDto Tournament { get; set; } = default!;
     }
 }

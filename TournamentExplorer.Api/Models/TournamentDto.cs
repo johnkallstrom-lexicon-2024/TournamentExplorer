@@ -14,6 +14,6 @@ namespace TournamentExplorer.Api.Models
         [JsonConverter(typeof(JsonStringEnumConverter))]
         public TournamentType Type { get; set; }
 
-        public IEnumerable<GameWithoutRelationsDto> Games { get; set; } = new List<GameWithoutRelationsDto>();
+        public IEnumerable<GameDto> Games { get; set; } = new List<GameDto>();
     }
 }

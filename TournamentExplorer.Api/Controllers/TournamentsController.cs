@@ -20,10 +20,10 @@ namespace TournamentExplorer.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetAllTournaments()
+        public async Task<ActionResult> GetAllTournaments([FromQuery] bool includeGames)
         {
-            var tournaments = await _unitOfWork.TournamentRepository.GetAllAsync();
-            var dtos = _mapper.Map<IEnumerable<TournamentWithoutRelationsDto>>(tournaments);
+            var tournaments = await _unitOfWork.TournamentRepository.GetAllAsync(includeGames);
+            var dtos = _mapper.Map<IEnumerable<TournamentDto>>(tournaments);
 
             return Ok(dtos);
         }
