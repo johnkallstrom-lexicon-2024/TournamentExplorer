@@ -42,7 +42,7 @@ namespace TournamentExplorer.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateTournament([FromBody] TournamentForCreateDto dto)
+        public async Task<ActionResult> CreateTournament([FromBody] TournamentCreateDto dto)
         {
             var tournament = _mapper.Map<Tournament>(dto);
 
@@ -56,7 +56,7 @@ namespace TournamentExplorer.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateTournament(int id, [FromBody] TournamentForUpdateDto dto)
+        public async Task<ActionResult> UpdateTournament(int id, [FromBody] TournamentUpdateDto dto)
         {
             var tournament = await _unitOfWork.TournamentRepository.GetAsync(id);
             if (tournament is null)

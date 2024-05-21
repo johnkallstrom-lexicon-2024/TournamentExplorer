@@ -3,7 +3,7 @@ using TournamentExplorer.Core.Enums;
 
 namespace TournamentExplorer.Api.Models
 {
-    public class TournamentForUpdateDto
+    public class TournamentUpdateDto
     {
         [MaxLength(20)]
         [Required()]

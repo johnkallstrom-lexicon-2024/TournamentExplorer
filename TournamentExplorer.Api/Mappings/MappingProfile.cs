@@ -9,8 +9,8 @@ namespace TournamentExplorer.Api.Mappings
         public MappingProfile()
         {
             CreateMap<Tournament, TournamentDto>();
-            CreateMap<TournamentForCreateDto, Tournament>();
-            CreateMap<TournamentForUpdateDto, Tournament>();
+            CreateMap<TournamentCreateDto, Tournament>();
+            CreateMap<TournamentUpdateDto, Tournament>();
 
             CreateMap<Game, GameDto>();
         }
