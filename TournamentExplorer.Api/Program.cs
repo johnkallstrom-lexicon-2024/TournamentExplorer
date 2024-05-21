@@ -1,4 +1,5 @@
 using System.Reflection;
+using TournamentExplorer.Api.Extensions;
 using TournamentExplorer.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,7 +14,7 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    //await app.SeedDatabase();
+    await app.SeedDatabase();
 
     app.UseSwagger();
     app.UseSwaggerUI();

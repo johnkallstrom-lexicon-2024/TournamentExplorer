@@ -9,6 +9,8 @@ namespace TournamentExplorer.Data.Configurations
         public void Configure(EntityTypeBuilder<Game> builder)
         {
             builder.ToTable("Game");
+
+            builder.Property(g => g.Name).HasMaxLength(50);
         }
     }
 }
