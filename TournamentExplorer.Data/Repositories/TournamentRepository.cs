@@ -35,9 +35,20 @@ namespace TournamentExplorer.Data.Repositories
             _context.Tournaments.Remove(tournament);
         }
 
-        public async Task<IEnumerable<Tournament>> GetAllAsync()
+        public async Task<IEnumerable<Tournament>> GetAllAsync(bool includeGames = false)
         {
-            var tournaments = await _context.Tournaments.ToListAsync();
+            IEnumerable<Tournament> tournaments;
+            if (includeGames)
+            {
+                tournaments = await _context.Tournaments
+                    .Include(t => t.Games)
+                    .ToListAsync();
+            }
+            else
+            {
+                tournaments = await _context.Tournaments.ToListAsync();
+            }
+
             return tournaments;
         }
 

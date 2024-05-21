@@ -4,7 +4,7 @@ namespace TournamentExplorer.Core.Contracts
 {
     public interface ITournamentRepository
     {
-        Task<IEnumerable<Tournament>> GetAllAsync();
+        Task<IEnumerable<Tournament>> GetAllAsync(bool includeGames = false);
         Task<Tournament?> GetAsync(int id, bool includeGames = false);
         Task<bool> AnyAsync();
         Task<Tournament> CreateAsync(Tournament tournament);
