@@ -13,19 +13,26 @@ namespace TournamentExplorer.Data.Repositories
             _context = context;
         }
 
-        public Task<bool> AnyAsync()
+        public async Task<bool> AnyAsync() => await _context.Tournaments.AnyAsync();
+
+        public async Task<Tournament> CreateAsync(Tournament tournament)
         {
-            throw new NotImplementedException();
+            if (tournament is null)
+            {
+                throw new ArgumentNullException(nameof(tournament));
+            }
+
+            return (await _context.Tournaments.AddAsync(tournament)).Entity;
         }
 
-        public Task<Tournament> CreateAsync(Tournament tournament)
+        public void Delete(Tournament tournament)
         {
-            throw new NotImplementedException();
-        }
+            if (tournament is null)
+            {
+                throw new ArgumentNullException(nameof(tournament));
+            }
 
-        public Task DeleteAsync(Tournament tournament)
-        {
-            throw new NotImplementedException();
+            _context.Tournaments.Remove(tournament);
         }
 
         public async Task<IEnumerable<Tournament>> GetAllAsync()
@@ -53,9 +60,14 @@ namespace TournamentExplorer.Data.Repositories
             return tournament;
         }
 
-        public Task UpdateAsync(Tournament tournament)
+        public void Update(Tournament tournament)
         {
-            throw new NotImplementedException();
+            if (tournament is null)
+            {
+                throw new ArgumentNullException(nameof(tournament));
+            }
+
+            _context.Update(tournament);
         }
     }
 }
