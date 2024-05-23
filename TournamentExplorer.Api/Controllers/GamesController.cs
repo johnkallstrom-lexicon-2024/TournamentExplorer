@@ -22,12 +22,10 @@ namespace TournamentExplorer.Api.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<GameDto>> GetGames()
         {
-            throw new Exception("Something went wrong on the server!");
+            var games = _unitOfWork.GameRepository.GetListIncluding(g => g.Tournament);
 
-            //var games = _unitOfWork.GameRepository.GetListIncluding(g => g.Tournament);
-
-            //var dtos = _mapper.Map<IEnumerable<GameDto>>(games);
-            //return Ok(dtos);
+            var dtos = _mapper.Map<IEnumerable<GameDto>>(games);
+            return Ok(dtos);
         }
 
         [HttpGet("{id}")]

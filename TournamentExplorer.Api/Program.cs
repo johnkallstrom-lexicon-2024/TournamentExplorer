@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Mvc;
 using System.Reflection;
+using TournamentExplorer.Api.ExceptionHandlers;
 using TournamentExplorer.Api.Extensions;
 using TournamentExplorer.Data;
 
@@ -9,15 +11,8 @@ builder.Services.AddControllers(config =>
     config.ReturnHttpNotAcceptable = true;
 }).AddXmlDataContractSerializerFormatters();
 
-// Used to add extra information on the Problem Details object 
-
-//builder.Services.AddProblemDetails(options =>
-//{
-//    options.CustomizeProblemDetails = ctx =>
-//    {
-//        ctx.ProblemDetails.Extensions.Add("extra", "hello world!");
-//    };
-//});
+builder.Services.AddProblemDetails();
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -34,8 +29,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseExceptionHandler();
 app.UseHttpsRedirection();
-
 app.MapControllers();
 
 app.Run();
