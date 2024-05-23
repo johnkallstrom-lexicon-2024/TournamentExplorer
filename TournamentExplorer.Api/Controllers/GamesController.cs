@@ -46,8 +46,6 @@ namespace TournamentExplorer.Api.Controllers
         {
             var entity = _mapper.Map<Game>(dto);
 
-            entity = null;
-
             var createdGame = _unitOfWork.GameRepository.Add(entity);
             await _unitOfWork.CompleteAsync();
 
