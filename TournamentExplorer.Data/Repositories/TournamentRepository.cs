@@ -14,9 +14,9 @@ namespace TournamentExplorer.Data.Repositories
             _context = context;
         }
 
-        public IEnumerable<Tournament> Get() => _context.Tournaments.AsNoTracking();
+        public IQueryable<Tournament> GetList() => _context.Tournaments.AsNoTracking();
 
-        public IEnumerable<Tournament> GetIncluding<T>(Expression<Func<Tournament, T>> predicate)
+        public IQueryable<Tournament> GetListIncluding<T>(Expression<Func<Tournament, T>> predicate)
         {
             var tournaments = _context.Tournaments
                 .Include(predicate)

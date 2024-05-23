@@ -23,8 +23,8 @@ namespace TournamentExplorer.Api.Controllers
         public ActionResult<IEnumerable<Tournament>> GetTournaments([FromQuery] bool includeGames)
         {
             IEnumerable<Tournament> tournaments = default!;
-            if (includeGames) tournaments = _unitOfWork.TournamentRepository.GetIncluding(t => t.Games);
-            else tournaments = _unitOfWork.TournamentRepository.Get();
+            if (includeGames) tournaments = _unitOfWork.TournamentRepository.GetListIncluding(t => t.Games);
+            else tournaments = _unitOfWork.TournamentRepository.GetList();
 
             var dtos = _mapper.Map<IEnumerable<TournamentDto>>(tournaments);
             return Ok(dtos);
