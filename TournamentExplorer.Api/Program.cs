@@ -9,6 +9,16 @@ builder.Services.AddControllers(config =>
     config.ReturnHttpNotAcceptable = true;
 }).AddXmlDataContractSerializerFormatters();
 
+// Used to add extra information on the Problem Details object 
+
+//builder.Services.AddProblemDetails(options =>
+//{
+//    options.CustomizeProblemDetails = ctx =>
+//    {
+//        ctx.ProblemDetails.Extensions.Add("extra", "hello world!");
+//    };
+//});
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDataServices(builder.Configuration);
