@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TournamentExplorer.Core.Contracts;
+using TournamentExplorer.Core.Entities;
 using TournamentExplorer.Data.Repositories;
 
 namespace TournamentExplorer.Data
@@ -15,7 +16,7 @@ namespace TournamentExplorer.Data
                 dbContextOptions.UseSqlServer(configuration.GetConnectionString("Default"));
             });
 
-            services.AddScoped<ITournamentRepository, TournamentRepository>();
+            services.AddScoped<IRepository<Tournament>, TournamentRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             return services;

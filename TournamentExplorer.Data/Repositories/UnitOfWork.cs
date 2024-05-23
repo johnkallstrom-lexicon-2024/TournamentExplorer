@@ -1,4 +1,5 @@
 ﻿using TournamentExplorer.Core.Contracts;
+using TournamentExplorer.Core.Entities;
 
 namespace TournamentExplorer.Data.Repositories
 {
@@ -12,7 +13,7 @@ namespace TournamentExplorer.Data.Repositories
             TournamentRepository = new TournamentRepository(_context);
         }
 
-        public ITournamentRepository TournamentRepository { get; }
+        public IRepository<Tournament> TournamentRepository { get; }
 
         public async Task CompleteAsync() => await _context.SaveChangesAsync();
     }

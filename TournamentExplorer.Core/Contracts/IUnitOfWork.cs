@@ -1,8 +1,10 @@
-﻿namespace TournamentExplorer.Core.Contracts
+﻿using TournamentExplorer.Core.Entities;
+
+namespace TournamentExplorer.Core.Contracts
 {
     public interface IUnitOfWork
     {
-        public ITournamentRepository TournamentRepository { get; }
+        IRepository<Tournament> TournamentRepository { get; }
         Task CompleteAsync();
     }
 }

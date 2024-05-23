@@ -20,18 +20,20 @@ namespace TournamentExplorer.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetAllTournaments([FromQuery] bool includeGames)
+        public ActionResult<IEnumerable<Tournament>> GetTournaments([FromQuery] bool includeGames)
         {
-            var tournaments = await _unitOfWork.TournamentRepository.GetAllAsync(includeGames);
-            var dtos = _mapper.Map<IEnumerable<TournamentDto>>(tournaments);
+            IEnumerable<Tournament> tournaments = default!;
+            if (includeGames) tournaments = _unitOfWork.TournamentRepository.GetIncluding(t => t.Games);
+            else tournaments = _unitOfWork.TournamentRepository.Get();
 
+            var dtos = _mapper.Map<IEnumerable<TournamentDto>>(tournaments);
             return Ok(dtos);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetTournament(int id, [FromQuery] bool includeGames)
+        public async Task<ActionResult<Tournament>> GetTournament(int id)
         {
-            var tournament = await _unitOfWork.TournamentRepository.GetAsync(id, includeGames);
+            var tournament = await _unitOfWork.TournamentRepository.GetByIdAsync(id);
             if (tournament is null)
             {
                 return NotFound();
@@ -46,7 +48,7 @@ namespace TournamentExplorer.Api.Controllers
         {
             var tournament = _mapper.Map<Tournament>(dto);
 
-            var createdTournament = await _unitOfWork.TournamentRepository.CreateAsync(tournament);
+            var createdTournament = _unitOfWork.TournamentRepository.Add(tournament);
             await _unitOfWork.CompleteAsync();
 
             return CreatedAtAction(
@@ -58,7 +60,7 @@ namespace TournamentExplorer.Api.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateTournament(int id, [FromBody] TournamentUpdateDto dto)
         {
-            var tournament = await _unitOfWork.TournamentRepository.GetAsync(id);
+            var tournament = await _unitOfWork.TournamentRepository.GetByIdAsync(id);
             if (tournament is null)
             {
                 return NotFound();
@@ -75,7 +77,7 @@ namespace TournamentExplorer.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteTournament(int id)
         {
-            var tournament = await _unitOfWork.TournamentRepository.GetAsync(id);
+            var tournament = await _unitOfWork.TournamentRepository.GetByIdAsync(id);
             if (tournament is null)
             {
                 return NotFound();

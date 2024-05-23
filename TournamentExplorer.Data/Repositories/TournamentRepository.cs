@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 using TournamentExplorer.Core.Contracts;
 using TournamentExplorer.Core.Entities;
 
 namespace TournamentExplorer.Data.Repositories
 {
-    public class TournamentRepository : ITournamentRepository
+    public class TournamentRepository : IRepository<Tournament>
     {
         private readonly TournamentExplorerDbContext _context;
 
@@ -13,72 +14,39 @@ namespace TournamentExplorer.Data.Repositories
             _context = context;
         }
 
-        public async Task<bool> AnyAsync() => await _context.Tournaments.AnyAsync();
+        public IEnumerable<Tournament> Get() => _context.Tournaments.AsNoTracking();
 
-        public async Task<Tournament> CreateAsync(Tournament tournament)
+        public IEnumerable<Tournament> GetIncluding<T>(Expression<Func<Tournament, T>> predicate)
         {
-            if (tournament is null)
-            {
-                throw new ArgumentNullException(nameof(tournament));
-            }
-
-            return (await _context.Tournaments.AddAsync(tournament)).Entity;
-        }
-
-        public void Delete(Tournament tournament)
-        {
-            if (tournament is null)
-            {
-                throw new ArgumentNullException(nameof(tournament));
-            }
-
-            _context.Tournaments.Remove(tournament);
-        }
-
-        public async Task<IEnumerable<Tournament>> GetAllAsync(bool includeGames = false)
-        {
-            IEnumerable<Tournament> tournaments;
-            if (includeGames)
-            {
-                tournaments = await _context.Tournaments
-                    .Include(t => t.Games)
-                    .ToListAsync();
-            }
-            else
-            {
-                tournaments = await _context.Tournaments.ToListAsync();
-            }
+            var tournaments = _context.Tournaments
+                .Include(predicate)
+                .AsNoTracking();
 
             return tournaments;
         }
 
-        public async Task<Tournament?> GetAsync(int id, bool includeGames = false)
+        public async Task<Tournament?> GetByIdAsync(int id)
         {
-            Tournament? tournament = null;
-            if (includeGames)
-            {
-                tournament = await _context.Tournaments
-                    .Include(t => t.Games)
-                    .FirstOrDefaultAsync(t => t.Id == id);
-
-                return tournament;
-            }
-            else
-            {
-                tournament = await _context.Tournaments.FirstOrDefaultAsync(t => t.Id == id);
-            }
+            var tournament = await _context.Tournaments
+                .Include(t => t.Games)
+                .FirstOrDefaultAsync(t => t.Id == id);
 
             return tournament;
         }
 
-        public void Update(Tournament tournament)
+        public Tournament Add(Tournament entity)
         {
-            if (tournament is null)
-            {
-                throw new ArgumentNullException(nameof(tournament));
-            }
+            throw new NotImplementedException();
+        }
 
-            _context.Update(tournament);
+        public void Update(Tournament entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(Tournament entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }
