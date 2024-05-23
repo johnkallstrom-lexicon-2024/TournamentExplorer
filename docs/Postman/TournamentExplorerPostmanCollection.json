@@ -10,7 +10,7 @@
 			"name": "Tournaments",
 			"item": [
 				{
-					"name": "Get All",
+					"name": "Get List",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
 							"accept": true
@@ -40,7 +40,43 @@
 					"response": []
 				},
 				{
-					"name": "Get All As XML",
+					"name": "Get List With Games",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:{{port}}/api/Tournaments?includeGames=true",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"Tournaments"
+							],
+							"query": [
+								{
+									"key": "includeGames",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get List As XML",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {}
 					},
@@ -68,6 +104,40 @@
 					"response": []
 				},
 				{
+					"name": "Get List With Games As XML",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xml"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:{{port}}/api/Tournaments?includeGames=true",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"Tournaments"
+							],
+							"query": [
+								{
+									"key": "includeGames",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get",
 					"request": {
 						"method": "GET",
@@ -78,7 +148,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://localhost:{{port}}/api/Tournaments/7",
+							"raw": "https://localhost:{{port}}/api/Tournaments/2",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -87,39 +157,7 @@
 							"path": [
 								"api",
 								"Tournaments",
-								"7"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get With Games",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"url": {
-							"raw": "https://localhost:{{port}}/api/Tournaments/7?includeGames=true",
-							"protocol": "https",
-							"host": [
-								"localhost"
-							],
-							"port": "{{port}}",
-							"path": [
-								"api",
-								"Tournaments",
-								"7"
-							],
-							"query": [
-								{
-									"key": "includeGames",
-									"value": "true"
-								}
+								"2"
 							]
 						}
 					},
@@ -444,6 +482,113 @@
 							"path": [
 								"api",
 								"Tournaments",
+								"999"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Games",
+			"item": [
+				{
+					"name": "Get List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:{{port}}/api/Games",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"Games"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get List As XML",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xml"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:{{port}}/api/Games",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"Games"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:{{port}}/api/Games/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"Games",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Non Existing",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:{{port}}/api/Games/999",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"Games",
 								"999"
 							]
 						}
