@@ -68,6 +68,12 @@ namespace TournamentExplorer.Api.Controllers
             return NoContent();
         }
 
+        [HttpPatch("{id}")]
+        public async Task<ActionResult> PatchGame(int id)
+        {
+            return NoContent();
+        }
+
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteGame(int id)
         {
