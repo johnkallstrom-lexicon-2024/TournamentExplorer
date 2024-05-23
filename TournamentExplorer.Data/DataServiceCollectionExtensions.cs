@@ -17,6 +17,7 @@ namespace TournamentExplorer.Data
             });
 
             services.AddScoped<IRepository<Tournament>, TournamentRepository>();
+            services.AddScoped<IRepository<Game>, GameRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             return services;

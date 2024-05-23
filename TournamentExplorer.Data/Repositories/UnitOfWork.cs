@@ -11,9 +11,11 @@ namespace TournamentExplorer.Data.Repositories
         {
             _context = context;
             TournamentRepository = new TournamentRepository(_context);
+            GameRepository = new GameRepository(_context);
         }
 
         public IRepository<Tournament> TournamentRepository { get; }
+        public IRepository<Game> GameRepository { get; }
 
         public async Task CompleteAsync() => await _context.SaveChangesAsync();
     }

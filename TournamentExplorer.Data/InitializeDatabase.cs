@@ -42,7 +42,7 @@ namespace TournamentExplorer.Data
 
                     games.Add(new Game
                     {
-                        Name = $"Game {i}",
+                        Name = $"{_faker.Lorem.Word()}",
                         Time = new DateTime(year, month, day),
                         Duration = duration,
                         TournamentId = tournament.Id,
