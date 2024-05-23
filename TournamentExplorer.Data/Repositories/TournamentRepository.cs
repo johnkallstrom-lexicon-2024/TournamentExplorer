@@ -34,19 +34,34 @@ namespace TournamentExplorer.Data.Repositories
             return tournament;
         }
 
-        public Tournament Add(Tournament entity)
+        public Tournament Add(Tournament tournament)
         {
-            throw new NotImplementedException();
+            if (tournament is null)
+            {
+                throw new ArgumentNullException(nameof(tournament));
+            }
+
+            return _context.Tournaments.Add(tournament).Entity;
         }
 
-        public void Update(Tournament entity)
+        public void Update(Tournament tournament)
         {
-            throw new NotImplementedException();
+            if (tournament is null)
+            {
+                throw new ArgumentNullException(nameof(tournament));
+            }
+
+            _context.Tournaments.Update(tournament);
         }
 
-        public void Delete(Tournament entity)
+        public void Delete(Tournament tournament)
         {
-            throw new NotImplementedException();
+            if (tournament is null)
+            {
+                throw new ArgumentNullException(nameof(tournament));
+            }
+
+            _context.Tournaments.Remove(tournament);
         }
     }
 }
