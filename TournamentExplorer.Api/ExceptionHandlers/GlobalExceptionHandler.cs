@@ -9,6 +9,7 @@ namespace TournamentExplorer.Api.ExceptionHandlers
         {
             var problemDetails = new ProblemDetails
             {
+                Type = exception.GetType().ToString(),
                 Title = "Internal Server Error",
                 Status = StatusCodes.Status500InternalServerError,
                 Detail = exception.Message,
