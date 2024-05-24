@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using TournamentExplorer.Api.Models;
+using TournamentExplorer.Api.Parameters;
 using TournamentExplorer.Core.Contracts;
 using TournamentExplorer.Core.Entities;
 
@@ -21,15 +22,13 @@ namespace TournamentExplorer.Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<GameDto>> GetGames([FromQuery] string filter = "")
+        public ActionResult<IEnumerable<GameDto>> GetGames([FromQuery] QueryParams? parameters)
         {
             var games = Enumerable.Empty<Game>();
 
-            if (!string.IsNullOrEmpty(filter))
+            if (parameters != null)
             {
-                games = _unitOfWork.GameRepository.Get(
-                    navigationProperty: g => g.Tournament, 
-                    filter: g => g.Name.Contains(filter));
+                games = _unitOfWork.GameRepository.Get(parameters, g => g.Tournament);
             }
             else
             {

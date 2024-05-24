@@ -16,6 +16,44 @@ namespace TournamentExplorer.Data.Repositories
 
         public IQueryable<Game> Get() => _context.Games.AsNoTracking();
 
+        public IQueryable<Game> Get(IQueryParams parameters)
+        {
+            var games = _context.Games.AsQueryable();
+
+            if (!string.IsNullOrEmpty(parameters.SearchTerm))
+            {
+                games = games.Where(g => g.Name.Contains(parameters.SearchTerm) || g.Tournament.Title.Contains(parameters.SearchTerm));
+            }
+
+            if (!string.IsNullOrEmpty(parameters.SortOrder))
+            {
+                games = parameters.SortOrder.ToLower().Equals("asc") ? games.OrderBy(g => g.Id) : games;
+                games = parameters.SortOrder.ToLower().Equals("desc") ? games.OrderByDescending(g => g.Id) : games;
+            }
+
+            return games;
+        }
+
+        public IQueryable<Game> Get<TProperty>(IQueryParams parameters, Expression<Func<Game, TProperty>> navigationProperty)
+        {
+            var games = navigationProperty != null ? _context.Games
+                .Include(navigationProperty)
+                .AsQueryable() : _context.Games.AsQueryable();
+
+            if (!string.IsNullOrEmpty(parameters.SearchTerm))
+            {
+                games = games.Where(g => g.Name.Contains(parameters.SearchTerm) || g.Tournament.Title.Contains(parameters.SearchTerm));
+            }
+
+            if (!string.IsNullOrEmpty(parameters.SortOrder))
+            {
+                games = parameters.SortOrder.ToLower().Equals("asc") ? games.OrderBy(g => g.Id) : games;
+                games = parameters.SortOrder.ToLower().Equals("desc") ? games.OrderByDescending(g => g.Id) : games;
+            }
+
+            return games;
+        }
+
         public IQueryable<Game> Get(Expression<Func<Game, bool>> filter)
         {
             var games = _context.Games
@@ -29,16 +67,6 @@ namespace TournamentExplorer.Data.Repositories
         {
             var games = _context.Games
                 .Include(navigationProperty)
-                .AsNoTracking();
-
-            return games;
-        }
-
-        public IQueryable<Game> Get<TProperty>(Expression<Func<Game, TProperty>> navigationProperty, Expression<Func<Game, bool>> filter)
-        {
-            var games = _context.Games
-                .Include(navigationProperty)
-                .Where(filter)
                 .AsNoTracking();
 
             return games;
