@@ -35,8 +35,7 @@ namespace TournamentExplorer.Api.Controllers
                 tournaments = _unitOfWork.TournamentRepository.Get(parameters);
             }
 
-            var dtos = _mapper.Map<IEnumerable<TournamentDto>>(tournaments);
-            return Ok(dtos);
+            return Ok(_mapper.Map<IEnumerable<TournamentDto>>(tournaments));
         }
 
         [HttpGet("{id}")]
