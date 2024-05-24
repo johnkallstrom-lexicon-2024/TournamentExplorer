@@ -18,12 +18,43 @@ namespace TournamentExplorer.Data.Repositories
 
         public IQueryable<Tournament> Get(IQueryParams parameters)
         {
-            throw new NotImplementedException();
+            var tournaments = _context.Tournaments.AsQueryable();
+
+            if (!string.IsNullOrEmpty(parameters.SearchTerm))
+            {
+                tournaments = tournaments.Where(t => t.Title.Contains(parameters.SearchTerm) || 
+                t.City.Contains(parameters.SearchTerm) || 
+                t.Country.Contains(parameters.SearchTerm));
+            }
+
+            if (!string.IsNullOrEmpty(parameters.SortOrder))
+            {
+                tournaments = parameters.SortOrder.ToLower().Equals("asc") ? tournaments.OrderBy(t => t.Id) : tournaments;
+                tournaments = parameters.SortOrder.ToLower().Equals("desc") ? tournaments.OrderByDescending(t => t.Id) : tournaments;
+            }
+
+            return tournaments;
         }
 
         public IQueryable<Tournament> Get<TProperty>(IQueryParams parameters, Expression<Func<Tournament, TProperty>> navigationProperty)
         {
-            throw new NotImplementedException();
+            var tournaments = navigationProperty != null ? 
+                _context.Tournaments.Include(navigationProperty).AsQueryable() : _context.Tournaments.AsQueryable();
+
+            if (!string.IsNullOrEmpty(parameters.SearchTerm))
+            {
+                tournaments = tournaments.Where(t => t.Title.Contains(parameters.SearchTerm) ||
+                t.City.Contains(parameters.SearchTerm) ||
+                t.Country.Contains(parameters.SearchTerm));
+            }
+
+            if (!string.IsNullOrEmpty(parameters.SortOrder))
+            {
+                tournaments = parameters.SortOrder.ToLower().Equals("asc") ? tournaments.OrderBy(t => t.Id) : tournaments;
+                tournaments = parameters.SortOrder.ToLower().Equals("desc") ? tournaments.OrderByDescending(t => t.Id) : tournaments;
+            }
+
+            return tournaments;
         }
 
         public IQueryable<Tournament> Get<TProperty>(Expression<Func<Tournament, TProperty>> navigationProperty)

@@ -23,7 +23,7 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    //await app.SeedDatabase();
+    await app.SeedDatabase();
 
     app.UseSwagger();
     app.UseSwaggerUI();

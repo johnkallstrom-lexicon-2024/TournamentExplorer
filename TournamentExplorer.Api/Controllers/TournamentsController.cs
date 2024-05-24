@@ -4,6 +4,7 @@ using TournamentExplorer.Api.Models;
 using AutoMapper;
 using TournamentExplorer.Core.Entities;
 using Microsoft.AspNetCore.JsonPatch;
+using TournamentExplorer.Api.Parameters;
 
 namespace TournamentExplorer.Api.Controllers
 {
@@ -21,11 +22,18 @@ namespace TournamentExplorer.Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Tournament>> GetTournaments([FromQuery] bool includeGames)
+        public ActionResult<IEnumerable<Tournament>> GetTournaments([FromQuery] TournamentQueryParams parameters)
         {
-            IEnumerable<Tournament> tournaments = default!;
-            if (includeGames) tournaments = _unitOfWork.TournamentRepository.Get(t => t.Games);
-            else tournaments = _unitOfWork.TournamentRepository.Get();
+            var tournaments = Enumerable.Empty<Tournament>();
+
+            if (parameters.IncludeGames)
+            {
+                tournaments = _unitOfWork.TournamentRepository.Get(parameters, t => t.Games);
+            }
+            else
+            {
+                tournaments = _unitOfWork.TournamentRepository.Get(parameters);
+            }
 
             var dtos = _mapper.Map<IEnumerable<TournamentDto>>(tournaments);
             return Ok(dtos);

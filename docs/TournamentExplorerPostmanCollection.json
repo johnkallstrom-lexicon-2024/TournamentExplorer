@@ -40,6 +40,78 @@
 					"response": []
 				},
 				{
+					"name": "Get Filtered",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:{{port}}/api/Tournaments?searchTerm=Myanmar",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"Tournaments"
+							],
+							"query": [
+								{
+									"key": "searchTerm",
+									"value": "Myanmar"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Sorted",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:{{port}}/api/Tournaments?sortOrder=desc",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"Tournaments"
+							],
+							"query": [
+								{
+									"key": "sortOrder",
+									"value": "desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get With Games",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
@@ -707,7 +779,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://localhost:{{port}}/api/Games?filter=voluptate",
+							"raw": "https://localhost:{{port}}/api/Games?searchTerm=voluptate",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -719,8 +791,70 @@
 							],
 							"query": [
 								{
-									"key": "filter",
+									"key": "searchTerm",
 									"value": "voluptate"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Sorted",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:{{port}}/api/Games?sortOrder=desc",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"Games"
+							],
+							"query": [
+								{
+									"key": "sortOrder",
+									"value": "desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Sorted Incorrect Input",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:{{port}}/api/Games?sortOrder=cascacasd",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"Games"
+							],
+							"query": [
+								{
+									"key": "sortOrder",
+									"value": "cascacasd"
 								}
 							]
 						}
