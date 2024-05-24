@@ -24,16 +24,8 @@ namespace TournamentExplorer.Api.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Tournament>> GetTournaments([FromQuery] TournamentQueryParams parameters)
         {
-            var tournaments = Enumerable.Empty<Tournament>();
-
-            if (parameters.IncludeGames)
-            {
-                tournaments = _unitOfWork.TournamentRepository.Get(parameters, t => t.Games);
-            }
-            else
-            {
-                tournaments = _unitOfWork.TournamentRepository.Get(parameters);
-            }
+            var tournaments = parameters.IncludeGames ? 
+                _unitOfWork.TournamentRepository.Get(parameters, t => t.Games) : _unitOfWork.TournamentRepository.Get(parameters);
 
             return Ok(_mapper.Map<IEnumerable<TournamentDto>>(tournaments));
         }
