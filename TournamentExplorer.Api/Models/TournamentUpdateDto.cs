@@ -6,7 +6,7 @@ namespace TournamentExplorer.Api.Models
     public class TournamentUpdateDto
     {
         [MaxLength(20)]
-        [Required()]
+        [Required]
         public string Title { get; set; } = default!;
 
         [DataType(DataType.DateTime)]

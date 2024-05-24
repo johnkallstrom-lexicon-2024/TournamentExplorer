@@ -12,7 +12,10 @@ namespace TournamentExplorer.Api.ExceptionHandlers
             _logger = logger;
         }
 
-        public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
+        public async ValueTask<bool> TryHandleAsync(
+            HttpContext httpContext, 
+            Exception exception, 
+            CancellationToken cancellationToken)
         {
             _logger.LogError(exception, $"An exception occurred: {exception.Message}");
 

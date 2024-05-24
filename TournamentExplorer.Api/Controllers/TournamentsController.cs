@@ -3,6 +3,7 @@ using TournamentExplorer.Core.Contracts;
 using TournamentExplorer.Api.Models;
 using AutoMapper;
 using TournamentExplorer.Core.Entities;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace TournamentExplorer.Api.Controllers
 {
@@ -75,8 +76,32 @@ namespace TournamentExplorer.Api.Controllers
         }
 
         [HttpPatch("{id}")]
-        public async Task<ActionResult> PatchTournament(int id)
+        public async Task<ActionResult> PatchTournament(int id, JsonPatchDocument<TournamentUpdateDto> patchDocument)
         {
+            var tournament = await _unitOfWork.TournamentRepository.GetByIdAsync(id);
+            if (tournament is null)
+            {
+                return NotFound();
+            }
+
+            var dtoToPatch = new TournamentUpdateDto();
+            dtoToPatch = _mapper.Map(source: tournament, destination: dtoToPatch);
+
+            patchDocument.ApplyTo(dtoToPatch, ModelState);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (!TryValidateModel(dtoToPatch))
+            {
+                return BadRequest(ModelState);
+            }
+
+            tournament = _mapper.Map(source: dtoToPatch, destination: tournament);
+            _unitOfWork.TournamentRepository.Update(tournament);
+            await _unitOfWork.CompleteAsync();
+
             return NoContent();
         }
 
