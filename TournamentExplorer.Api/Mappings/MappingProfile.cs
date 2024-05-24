@@ -16,7 +16,7 @@ namespace TournamentExplorer.Api.Mappings
                 .ForMember(dto => dto.Tournament, cfg => cfg.MapFrom(game => game.Tournament.Title));
 
             CreateMap<GameCreateDto, Game>();
-            CreateMap<GameUpdateDto, Game>();
+            CreateMap<GameUpdateDto, Game>().ReverseMap();
         }
     }
 }

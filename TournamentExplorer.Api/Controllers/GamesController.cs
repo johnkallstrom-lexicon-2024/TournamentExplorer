@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using TournamentExplorer.Api.Models;
 using TournamentExplorer.Core.Contracts;
@@ -69,8 +70,35 @@ namespace TournamentExplorer.Api.Controllers
         }
 
         [HttpPatch("{id}")]
-        public async Task<ActionResult> PatchGame(int id)
+        public async Task<ActionResult> PatchGame(int id, JsonPatchDocument<GameUpdateDto> patchDocument)
         {
+            var game = await _unitOfWork.GameRepository.GetByIdAsync(id);
+            if (game is null)
+            {
+                return NotFound();
+            }
+
+            // Apply patch
+            var dtoToPatch = new GameUpdateDto();
+            dtoToPatch = _mapper.Map(destination: dtoToPatch, source: game);
+
+            patchDocument.ApplyTo(dtoToPatch, ModelState);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            // Validate patched dto
+            if (!TryValidateModel(dtoToPatch))
+            {
+                return BadRequest(ModelState);
+            }
+
+            // Update entity and save to db
+            game = _mapper.Map(source: dtoToPatch, destination: game);
+            _unitOfWork.GameRepository.Update(game);
+            await _unitOfWork.CompleteAsync();
+
             return NoContent();
         }
 
