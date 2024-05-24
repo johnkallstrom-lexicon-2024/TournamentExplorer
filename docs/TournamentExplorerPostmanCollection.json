@@ -148,7 +148,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://localhost:{{port}}/api/Tournaments/2",
+							"raw": "https://localhost:{{port}}/api/Tournaments/1",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -157,7 +157,7 @@
 							"path": [
 								"api",
 								"Tournaments",
-								"2"
+								"1"
 							]
 						}
 					},
@@ -491,13 +491,12 @@
 						"header": [
 							{
 								"key": "Accept",
-								"value": "application/json-patch+json",
-								"type": "text"
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"Partial Update With Patch\"\r\n}",
+							"raw": "[\r\n    {\r\n        \"op\": \"replace\",\r\n        \"path\": \"/title\",\r\n        \"value\": \"Updated Title\"\r\n    }\r\n]",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -521,18 +520,18 @@
 					"response": []
 				},
 				{
-					"name": "Partial Update Invalid Input",
+					"name": "Partial Update Multiple Fields",
 					"request": {
 						"method": "PATCH",
 						"header": [
 							{
 								"key": "Accept",
-								"value": "application/json-patch+json"
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": null\r\n}",
+							"raw": "[\r\n    {\r\n        \"op\": \"replace\",\r\n        \"path\": \"/title\",\r\n        \"value\": \"Updated Again\"\r\n    },\r\n    {\r\n        \"op\": \"replace\",\r\n        \"path\": \"/city\",\r\n        \"value\": \"Wien\"\r\n    },\r\n    {\r\n        \"op\": \"replace\",\r\n        \"path\": \"/country\",\r\n        \"value\": \"Austria\"\r\n    }\r\n]",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -556,19 +555,18 @@
 					"response": []
 				},
 				{
-					"name": "Partial Update Non Existing",
+					"name": "Partial Update Incorrect Country",
 					"request": {
 						"method": "PATCH",
 						"header": [
 							{
 								"key": "Accept",
-								"value": "application/json-patch+json",
-								"type": "text"
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"Partial Update With Patch\"\r\n}",
+							"raw": "[\r\n    {\r\n        \"op\": \"replace\",\r\n        \"path\": \"/country\",\r\n        \"value\": null\r\n    }\r\n]",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -576,7 +574,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://localhost:{{port}}/api/Tournaments/999",
+							"raw": "https://localhost:{{port}}/api/Tournaments/1",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -585,7 +583,42 @@
 							"path": [
 								"api",
 								"Tournaments",
-								"999"
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Partial Update Non Existing Field",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"op\": \"replace\",\r\n        \"path\": \"/invalidfield\",\r\n        \"value\": \"Hello World!\"\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:{{port}}/api/Tournaments/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"Tournaments",
+								"1"
 							]
 						}
 					},
@@ -747,13 +780,11 @@
 						"header": [
 							{
 								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
+								"value": "application/json"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -863,8 +894,7 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
+								"value": "application/json"
 							}
 						],
 						"body": {
