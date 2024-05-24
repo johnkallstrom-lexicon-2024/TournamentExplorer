@@ -24,8 +24,8 @@ namespace TournamentExplorer.Api.Controllers
         public ActionResult<IEnumerable<Tournament>> GetTournaments([FromQuery] bool includeGames)
         {
             IEnumerable<Tournament> tournaments = default!;
-            if (includeGames) tournaments = _unitOfWork.TournamentRepository.GetListIncluding(t => t.Games);
-            else tournaments = _unitOfWork.TournamentRepository.GetList();
+            if (includeGames) tournaments = _unitOfWork.TournamentRepository.Get(t => t.Games);
+            else tournaments = _unitOfWork.TournamentRepository.Get();
 
             var dtos = _mapper.Map<IEnumerable<TournamentDto>>(tournaments);
             return Ok(dtos);
@@ -50,7 +50,7 @@ namespace TournamentExplorer.Api.Controllers
             var tournament = _mapper.Map<Tournament>(dto);
 
             var createdTournament = _unitOfWork.TournamentRepository.Add(tournament);
-            await _unitOfWork.CompleteAsync();
+            await _unitOfWork.SaveAsync();
 
             return CreatedAtAction(
                 nameof(GetTournament), 
@@ -70,7 +70,7 @@ namespace TournamentExplorer.Api.Controllers
             tournament = _mapper.Map(source: dto, destination: tournament);
 
             _unitOfWork.TournamentRepository.Update(tournament);
-            await _unitOfWork.CompleteAsync();
+            await _unitOfWork.SaveAsync();
 
             return NoContent();
         }
@@ -100,7 +100,7 @@ namespace TournamentExplorer.Api.Controllers
 
             tournament = _mapper.Map(source: dtoToPatch, destination: tournament);
             _unitOfWork.TournamentRepository.Update(tournament);
-            await _unitOfWork.CompleteAsync();
+            await _unitOfWork.SaveAsync();
 
             return NoContent();
         }
@@ -115,7 +115,7 @@ namespace TournamentExplorer.Api.Controllers
             }
 
             _unitOfWork.TournamentRepository.Delete(tournament);
-            await _unitOfWork.CompleteAsync();
+            await _unitOfWork.SaveAsync();
 
             return NoContent();
         }

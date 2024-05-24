@@ -17,6 +17,6 @@ namespace TournamentExplorer.Data.Repositories
         public IRepository<Tournament> TournamentRepository { get; }
         public IRepository<Game> GameRepository { get; }
 
-        public async Task CompleteAsync() => await _context.SaveChangesAsync();
+        public async Task SaveAsync() => await _context.SaveChangesAsync();
     }
 }

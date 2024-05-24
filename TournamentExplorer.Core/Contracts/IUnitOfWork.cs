@@ -6,6 +6,6 @@ namespace TournamentExplorer.Core.Contracts
     {
         IRepository<Tournament> TournamentRepository { get; }
         IRepository<Game> GameRepository { get; }
-        Task CompleteAsync();
+        Task SaveAsync();
     }
 }

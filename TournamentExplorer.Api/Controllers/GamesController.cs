@@ -23,7 +23,7 @@ namespace TournamentExplorer.Api.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<GameDto>> GetGames()
         {
-            var games = _unitOfWork.GameRepository.GetListIncluding(g => g.Tournament);
+            var games = _unitOfWork.GameRepository.Get(g => g.Tournament);
 
             var dtos = _mapper.Map<IEnumerable<GameDto>>(games);
             return Ok(dtos);
@@ -48,7 +48,7 @@ namespace TournamentExplorer.Api.Controllers
             var entity = _mapper.Map<Game>(dto);
 
             var createdGame = _unitOfWork.GameRepository.Add(entity);
-            await _unitOfWork.CompleteAsync();
+            await _unitOfWork.SaveAsync();
 
             return CreatedAtAction(nameof(GetGame), new { createdGame.Id }, createdGame);
         }
@@ -64,7 +64,7 @@ namespace TournamentExplorer.Api.Controllers
 
             game = _mapper.Map(source: dto, destination: game);
             _unitOfWork.GameRepository.Update(game);
-            await _unitOfWork.CompleteAsync();
+            await _unitOfWork.SaveAsync();
 
             return NoContent();
         }
@@ -97,7 +97,7 @@ namespace TournamentExplorer.Api.Controllers
             // Update entity and save to db
             game = _mapper.Map(source: dtoToPatch, destination: game);
             _unitOfWork.GameRepository.Update(game);
-            await _unitOfWork.CompleteAsync();
+            await _unitOfWork.SaveAsync();
 
             return NoContent();
         }
@@ -112,7 +112,7 @@ namespace TournamentExplorer.Api.Controllers
             }
 
             _unitOfWork.GameRepository.Delete(game);
-            await _unitOfWork.CompleteAsync();
+            await _unitOfWork.SaveAsync();
 
             return NoContent();
         }

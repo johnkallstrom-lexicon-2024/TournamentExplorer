@@ -4,8 +4,8 @@ namespace TournamentExplorer.Core.Contracts
 {
     public interface IRepository<TEntity> where TEntity : class
     {
-        IQueryable<TEntity> GetList();
-        IQueryable<TEntity> GetListIncluding<T>(Expression<Func<TEntity, T>> predicate);
+        IQueryable<TEntity> Get();
+        IQueryable<TEntity> Get<TProperty>(Expression<Func<TEntity, TProperty>> navigationProperty);
         Task<TEntity?> GetByIdAsync(int id);
         TEntity Add(TEntity entity);
         void Update(TEntity entity);

@@ -14,12 +14,12 @@ namespace TournamentExplorer.Data.Repositories
             _context = context;
         }
 
-        public IQueryable<Tournament> GetList() => _context.Tournaments.AsNoTracking();
+        public IQueryable<Tournament> Get() => _context.Tournaments.AsNoTracking();
 
-        public IQueryable<Tournament> GetListIncluding<T>(Expression<Func<Tournament, T>> predicate)
+        public IQueryable<Tournament> Get<TProperty>(Expression<Func<Tournament, TProperty>> navigationProperty)
         {
             var tournaments = _context.Tournaments
-                .Include(predicate)
+                .Include(navigationProperty)
                 .AsNoTracking();
 
             return tournaments;

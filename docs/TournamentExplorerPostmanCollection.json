@@ -10,135 +10,135 @@
 			"name": "Tournaments",
 			"item": [
 				{
-					"name": "Get List",
-					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {
-							"accept": true
-						}
-					},
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"url": {
-							"raw": "https://localhost:{{port}}/api/Tournaments",
-							"protocol": "https",
-							"host": [
-								"localhost"
-							],
-							"port": "{{port}}",
-							"path": [
-								"api",
-								"Tournaments"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get List With Games",
-					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {
-							"accept": true
-						}
-					},
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"url": {
-							"raw": "https://localhost:{{port}}/api/Tournaments?includeGames=true",
-							"protocol": "https",
-							"host": [
-								"localhost"
-							],
-							"port": "{{port}}",
-							"path": [
-								"api",
-								"Tournaments"
-							],
-							"query": [
-								{
-									"key": "includeGames",
-									"value": "true"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get List As XML",
-					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {}
-					},
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/xml"
-							}
-						],
-						"url": {
-							"raw": "https://localhost:{{port}}/api/Tournaments",
-							"protocol": "https",
-							"host": [
-								"localhost"
-							],
-							"port": "{{port}}",
-							"path": [
-								"api",
-								"Tournaments"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get List With Games As XML",
-					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {}
-					},
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/xml"
-							}
-						],
-						"url": {
-							"raw": "https://localhost:{{port}}/api/Tournaments?includeGames=true",
-							"protocol": "https",
-							"host": [
-								"localhost"
-							],
-							"port": "{{port}}",
-							"path": [
-								"api",
-								"Tournaments"
-							],
-							"query": [
-								{
-									"key": "includeGames",
-									"value": "true"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Get",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:{{port}}/api/Tournaments",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"Tournaments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get With Games",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:{{port}}/api/Tournaments?includeGames=true",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"Tournaments"
+							],
+							"query": [
+								{
+									"key": "includeGames",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get As XML",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xml"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:{{port}}/api/Tournaments",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"Tournaments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get With Games As XML",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xml"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:{{port}}/api/Tournaments?includeGames=true",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"Tournaments"
+							],
+							"query": [
+								{
+									"key": "includeGames",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get By Id",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -164,7 +164,7 @@
 					"response": []
 				},
 				{
-					"name": "Get Non Existing",
+					"name": "Get By Id Non Existing",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -190,7 +190,7 @@
 					"response": []
 				},
 				{
-					"name": "Get As XML",
+					"name": "Get By Id As XML",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -672,7 +672,7 @@
 			"name": "Games",
 			"item": [
 				{
-					"name": "Get List",
+					"name": "Get",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -697,7 +697,7 @@
 					"response": []
 				},
 				{
-					"name": "Get List As XML",
+					"name": "Get As XML",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -722,7 +722,7 @@
 					"response": []
 				},
 				{
-					"name": "Get",
+					"name": "Get By Id",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -748,7 +748,7 @@
 					"response": []
 				},
 				{
-					"name": "Get Non Existing",
+					"name": "Get By Id Non Existing",
 					"request": {
 						"method": "GET",
 						"header": [
