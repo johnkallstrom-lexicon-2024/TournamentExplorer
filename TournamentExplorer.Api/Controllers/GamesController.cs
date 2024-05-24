@@ -21,9 +21,20 @@ namespace TournamentExplorer.Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<GameDto>> GetGames()
+        public ActionResult<IEnumerable<GameDto>> GetGames([FromQuery] string filter = "")
         {
-            var games = _unitOfWork.GameRepository.Get(g => g.Tournament);
+            var games = Enumerable.Empty<Game>();
+
+            if (!string.IsNullOrEmpty(filter))
+            {
+                games = _unitOfWork.GameRepository.Get(
+                    navigationProperty: g => g.Tournament, 
+                    filter: g => g.Name.Contains(filter));
+            }
+            else
+            {
+                games = _unitOfWork.GameRepository.Get(g => g.Tournament);
+            }
 
             var dtos = _mapper.Map<IEnumerable<GameDto>>(games);
             return Ok(dtos);

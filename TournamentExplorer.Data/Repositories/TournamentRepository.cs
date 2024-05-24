@@ -16,6 +16,11 @@ namespace TournamentExplorer.Data.Repositories
 
         public IQueryable<Tournament> Get() => _context.Tournaments.AsNoTracking();
 
+        public IQueryable<Tournament> Get(Expression<Func<Tournament, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
+
         public IQueryable<Tournament> Get<TProperty>(Expression<Func<Tournament, TProperty>> navigationProperty)
         {
             var tournaments = _context.Tournaments
@@ -23,6 +28,11 @@ namespace TournamentExplorer.Data.Repositories
                 .AsNoTracking();
 
             return tournaments;
+        }
+
+        public IQueryable<Tournament> Get<TProperty>(Expression<Func<Tournament, TProperty>> navigationProperty, Expression<Func<Tournament, bool>> filter)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<Tournament?> GetByIdAsync(int id)
