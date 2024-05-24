@@ -732,7 +732,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://localhost:{{port}}/api/Games/1",
+							"raw": "https://localhost:{{port}}/api/Games/6",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -741,7 +741,7 @@
 							"path": [
 								"api",
 								"Games",
-								"1"
+								"6"
 							]
 						}
 					},
@@ -952,6 +952,146 @@
 								"api",
 								"Games",
 								"999"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Partial Update",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"op\": \"replace\",\r\n        \"path\": \"/name\",\r\n        \"value\": \"Updated Name\"\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:{{port}}/api/Games/6",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"Games",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Partial Update Multiple Fields",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"op\": \"replace\",\r\n        \"path\": \"/name\",\r\n        \"value\": \"Updated Again\"\r\n    },\r\n    {\r\n        \"op\": \"replace\",\r\n        \"path\": \"/time\",\r\n        \"value\": \"2024-07-15\"\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:{{port}}/api/Games/6",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"Games",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Partial Update Incorrect Name",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"op\": \"remove\",\r\n        \"path\": \"/name\"\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:{{port}}/api/Games/6",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"Games",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Partial Update Non Existing Field",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"op\": \"replace\",\r\n        \"path\": \"/invalidproperty\",\r\n        \"value\": \"Lorem ipsum\"\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:{{port}}/api/Games/6",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"Games",
+								"6"
 							]
 						}
 					},
