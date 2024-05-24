@@ -697,6 +697,37 @@
 					"response": []
 				},
 				{
+					"name": "Get Filtered",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:{{port}}/api/Games?filter=voluptate",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"Games"
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": "voluptate"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get As XML",
 					"request": {
 						"method": "GET",
