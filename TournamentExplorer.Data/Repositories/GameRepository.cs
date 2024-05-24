@@ -54,15 +54,6 @@ namespace TournamentExplorer.Data.Repositories
             return games;
         }
 
-        public IQueryable<Game> Get(Expression<Func<Game, bool>> filter)
-        {
-            var games = _context.Games
-                .Where(filter)
-                .AsNoTracking();
-
-            return games;
-        }
-
         public IQueryable<Game> Get<TProperty>(Expression<Func<Game, TProperty>> navigationProperty)
         {
             var games = _context.Games
