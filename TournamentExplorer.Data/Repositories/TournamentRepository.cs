@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.Metrics;
 using System.Linq.Expressions;
 using TournamentExplorer.Core.Contracts;
 using TournamentExplorer.Core.Entities;
@@ -27,10 +28,27 @@ namespace TournamentExplorer.Data.Repositories
                 t.Country.Contains(parameters.SearchTerm));
             }
 
-            if (!string.IsNullOrEmpty(parameters.SortOrder))
+            if (!string.IsNullOrEmpty(parameters.SortBy) && !string.IsNullOrEmpty(parameters.SortOrder))
             {
-                tournaments = parameters.SortOrder.ToLower().Equals("asc") ? tournaments.OrderBy(t => t.Id) : tournaments;
-                tournaments = parameters.SortOrder.ToLower().Equals("desc") ? tournaments.OrderByDescending(t => t.Id) : tournaments;
+                switch (parameters.SortBy.ToLower())
+                {
+                    case "title":
+                        tournaments = parameters.SortOrder.ToLower().Equals("asc") ? tournaments.OrderBy(t => t.Title) : tournaments;
+                        tournaments = parameters.SortOrder.ToLower().Equals("desc") ? tournaments.OrderByDescending(t => t.Title) : tournaments;
+                        break;
+                    case "city":
+                        tournaments = parameters.SortOrder.ToLower().Equals("asc") ? tournaments.OrderBy(t => t.City) : tournaments;
+                        tournaments = parameters.SortOrder.ToLower().Equals("desc") ? tournaments.OrderByDescending(t => t.City) : tournaments;
+                        break;
+                    case "country":
+                        tournaments = parameters.SortOrder.ToLower().Equals("asc") ? tournaments.OrderBy(t => t.Country) : tournaments;
+                        tournaments = parameters.SortOrder.ToLower().Equals("desc") ? tournaments.OrderByDescending(t => t.Country) : tournaments;
+                        break;
+                    default:
+                        tournaments = parameters.SortOrder.ToLower().Equals("asc") ? tournaments.OrderBy(t => t.Id) : tournaments;
+                        tournaments = parameters.SortOrder.ToLower().Equals("desc") ? tournaments.OrderByDescending(t => t.Id) : tournaments;
+                        break;
+                }
             }
 
             return tournaments;
@@ -48,10 +66,27 @@ namespace TournamentExplorer.Data.Repositories
                 t.Country.Contains(parameters.SearchTerm));
             }
 
-            if (!string.IsNullOrEmpty(parameters.SortOrder))
+            if (!string.IsNullOrEmpty(parameters.SortBy) && !string.IsNullOrEmpty(parameters.SortOrder))
             {
-                tournaments = parameters.SortOrder.ToLower().Equals("asc") ? tournaments.OrderBy(t => t.Id) : tournaments;
-                tournaments = parameters.SortOrder.ToLower().Equals("desc") ? tournaments.OrderByDescending(t => t.Id) : tournaments;
+                switch (parameters.SortBy.ToLower())
+                {
+                    case "title":
+                        tournaments = parameters.SortOrder.ToLower().Equals("asc") ? tournaments.OrderBy(t => t.Title) : tournaments;
+                        tournaments = parameters.SortOrder.ToLower().Equals("desc") ? tournaments.OrderByDescending(t => t.Title) : tournaments;
+                        break;
+                    case "city":
+                        tournaments = parameters.SortOrder.ToLower().Equals("asc") ? tournaments.OrderBy(t => t.City) : tournaments;
+                        tournaments = parameters.SortOrder.ToLower().Equals("desc") ? tournaments.OrderByDescending(t => t.City) : tournaments;
+                        break;
+                    case "country":
+                        tournaments = parameters.SortOrder.ToLower().Equals("asc") ? tournaments.OrderBy(t => t.Country) : tournaments;
+                        tournaments = parameters.SortOrder.ToLower().Equals("desc") ? tournaments.OrderByDescending(t => t.Country) : tournaments;
+                        break;
+                    default:
+                        tournaments = parameters.SortOrder.ToLower().Equals("asc") ? tournaments.OrderBy(t => t.Id) : tournaments;
+                        tournaments = parameters.SortOrder.ToLower().Equals("desc") ? tournaments.OrderByDescending(t => t.Id) : tournaments;
+                        break;
+                }
             }
 
             return tournaments;
