@@ -46,7 +46,7 @@ namespace TournamentExplorer.Data.Seeding
                     games.Add(new Game
                     {
                         Name = $"Game {i}",
-                        Time = new DateTime(year, month, day),
+                        Time = _faker.Date.Between(tournament.StartDate, tournament.StartDate.AddMonths(3)),
                         Duration = duration,
                         TournamentId = tournament.Id,
                         Tournament = tournament
