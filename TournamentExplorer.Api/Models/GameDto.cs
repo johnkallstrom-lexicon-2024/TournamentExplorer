@@ -1,11 +1,12 @@
 ﻿namespace TournamentExplorer.Api.Models
 {
-    public class GameDto
+    public record GameDto
     {
-        public int Id { get; set; }
-        public string? Name { get; set; }
-        public DateTime Time { get; set; }
-        public int Duration { get; set; }
-        public string? Tournament { get; set; }
+        public int Id { get; init; }
+        public string? Name { get; init; }
+        public DateTime Time { get; init; }
+        public int Duration { get; init; }
+
+        public TournamentSlimDto Tournament { get; init; } = default!;
     }
 }

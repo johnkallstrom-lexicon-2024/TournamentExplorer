@@ -4,9 +4,8 @@ using TournamentExplorer.Core.Enums;
 
 namespace TournamentExplorer.Api.Models
 {
-    public record TournamentDto
+    public record TournamentSlimDto
     {
-        public int Id { get; init; }
         public string? Title { get; init; }
         public DateTime StartDate { get; init; }
         public DateTime EndDate => StartDate.AddMonths(3);
@@ -14,7 +13,5 @@ namespace TournamentExplorer.Api.Models
         public string? Country { get; init; }
         [JsonConverter(typeof(StringEnumConverter))]
         public TournamentType Type { get; init; }
-
-        public IEnumerable<GameDto> Games { get; init; } = new List<GameDto>();
     }
 }

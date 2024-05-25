@@ -9,12 +9,11 @@ namespace TournamentExplorer.Api.Mappings
         public MappingProfile()
         {
             CreateMap<Tournament, TournamentDto>();
+            CreateMap<Tournament, TournamentSlimDto>();
             CreateMap<TournamentCreateDto, Tournament>();
             CreateMap<TournamentUpdateDto, Tournament>().ReverseMap();
 
-            CreateMap<Game, GameDto>()
-                .ForMember(dto => dto.Tournament, cfg => cfg.MapFrom(game => game.Tournament.Title));
-
+            CreateMap<Game, GameDto>();
             CreateMap<GameCreateDto, Game>();
             CreateMap<GameUpdateDto, Game>().ReverseMap();
         }
