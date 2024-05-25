@@ -57,15 +57,6 @@ namespace TournamentExplorer.Data.Repositories
             return tournaments;
         }
 
-        public IQueryable<Tournament> Get<TProperty>(Expression<Func<Tournament, TProperty>> navigationProperty)
-        {
-            var tournaments = _context.Tournaments
-                .Include(navigationProperty)
-                .AsNoTracking();
-
-            return tournaments;
-        }
-
         public async Task<Tournament?> GetByIdAsync(int id)
         {
             var tournament = await _context.Tournaments
