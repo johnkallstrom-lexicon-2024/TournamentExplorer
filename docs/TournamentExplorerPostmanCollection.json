@@ -55,7 +55,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://localhost:{{port}}/api/Tournaments?searchTerm=Myanmar",
+							"raw": "https://localhost:{{port}}/api/Tournaments?searchTerm=Franecki",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -68,7 +68,7 @@
 							"query": [
 								{
 									"key": "searchTerm",
-									"value": "Myanmar"
+									"value": "Franecki"
 								}
 							]
 						}
@@ -91,7 +91,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://localhost:{{port}}/api/Tournaments?sortOrder=desc",
+							"raw": "https://localhost:{{port}}/api/Tournaments?sortBy=country&sortOrder=asc",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -103,8 +103,52 @@
 							],
 							"query": [
 								{
+									"key": "sortBy",
+									"value": "country"
+								},
+								{
 									"key": "sortOrder",
-									"value": "desc"
+									"value": "asc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Sorted Invalid Parameters",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:{{port}}/api/Tournaments?sortBy=asdasd&sortOrder=asdas",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"Tournaments"
+							],
+							"query": [
+								{
+									"key": "sortBy",
+									"value": "asdasd"
+								},
+								{
+									"key": "sortOrder",
+									"value": "asdas"
 								}
 							]
 						}
@@ -138,6 +182,90 @@
 								"Tournaments"
 							],
 							"query": [
+								{
+									"key": "includeGames",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Filtered With Games",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:{{port}}/api/Tournaments?includeGames=true&searchTerm=Pacocha and Sons",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"Tournaments"
+							],
+							"query": [
+								{
+									"key": "includeGames",
+									"value": "true"
+								},
+								{
+									"key": "searchTerm",
+									"value": "Pacocha and Sons"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Sorted With Games",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:{{port}}/api/Tournaments?sortBy=country&sortOrder=asc&includeGames=true",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"Tournaments"
+							],
+							"query": [
+								{
+									"key": "sortBy",
+									"value": "country"
+								},
+								{
+									"key": "sortOrder",
+									"value": "asc"
+								},
 								{
 									"key": "includeGames",
 									"value": "true"
@@ -779,7 +907,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://localhost:{{port}}/api/Games?searchTerm=voluptate",
+							"raw": "https://localhost:{{port}}/api/Games?searchTerm=Tournament 5",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -792,7 +920,7 @@
 							"query": [
 								{
 									"key": "searchTerm",
-									"value": "voluptate"
+									"value": "Tournament 5"
 								}
 							]
 						}
@@ -831,7 +959,7 @@
 					"response": []
 				},
 				{
-					"name": "Get Sorted Incorrect Input",
+					"name": "Get Sorted Invalid Parameters",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -855,6 +983,37 @@
 								{
 									"key": "sortOrder",
 									"value": "cascacasd"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get With Tournament",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:{{port}}/api/Games?includeTournament=true",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"Games"
+							],
+							"query": [
+								{
+									"key": "includeTournament",
+									"value": "true"
 								}
 							]
 						}
