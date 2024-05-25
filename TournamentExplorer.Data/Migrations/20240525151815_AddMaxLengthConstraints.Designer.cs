@@ -12,8 +12,8 @@ using TournamentExplorer.Data;
 namespace TournamentExplorer.Data.Migrations
 {
     [DbContext(typeof(TournamentExplorerDbContext))]
-    [Migration("20240521124939_AddMaxLengthToProperties")]
-    partial class AddMaxLengthToProperties
+    [Migration("20240525151815_AddMaxLengthConstraints")]
+    partial class AddMaxLengthConstraints
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -64,13 +64,13 @@ namespace TournamentExplorer.Data.Migrations
 
                     b.Property<string>("City")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Country")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");

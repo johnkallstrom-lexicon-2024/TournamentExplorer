@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TournamentExplorer.Data;
+using TournamentExplorer.Data.Seeding;
 
 namespace TournamentExplorer.Api.Extensions
 {

@@ -11,8 +11,8 @@ namespace TournamentExplorer.Data.Configurations
             builder.ToTable("Tournament");
 
             builder.Property(t => t.Title).HasMaxLength(50);
-            builder.Property(t => t.City).HasMaxLength(50);
-            builder.Property(t => t.Country).HasMaxLength(50);
+            builder.Property(t => t.City).HasMaxLength(100);
+            builder.Property(t => t.Country).HasMaxLength(100);
         }
     }
 }

@@ -1,16 +1,19 @@
 ﻿using Bogus;
 using TournamentExplorer.Core.Entities;
 using TournamentExplorer.Core.Enums;
+using TournamentExplorer.Data.Seeding.Fakers;
 
-namespace TournamentExplorer.Data
+namespace TournamentExplorer.Data.Seeding
 {
     public static class InitializeDatabase
     {
+        private static TournamentFaker _tournamentFaker = new();
         private static Faker _faker = new Faker();
 
         public static async Task SeedAsync(TournamentExplorerDbContext context)
         {
-            var tournaments = GenerateTournaments();
+            var tournaments = _tournamentFaker.Generate(50);
+
             var games = GenerateGames(tournaments);
 
             if (tournaments != null && tournaments.Count() > 0)
@@ -34,7 +37,7 @@ namespace TournamentExplorer.Data
             {
                 int duration = GetGameDuration(tournament.Type);
 
-                for (int i = 1; i <= _faker.Random.Int(min: 1, max: 7); i++)
+                for (int i = 1; i <= _faker.Random.Int(min: 5, max: 15); i++)
                 {
                     var year = tournament.StartDate.Year;
                     var month = tournament.StartDate.Month;
@@ -42,7 +45,7 @@ namespace TournamentExplorer.Data
 
                     games.Add(new Game
                     {
-                        Name = $"{_faker.Lorem.Word()}",
+                        Name = $"Game {i}",
                         Time = new DateTime(year, month, day),
                         Duration = duration,
                         TournamentId = tournament.Id,
@@ -52,32 +55,6 @@ namespace TournamentExplorer.Data
             }
 
             return games;
-        }
-
-        public static IEnumerable<Tournament> GenerateTournaments()
-        {
-            var tournaments = new List<Tournament>();
-
-            var year = DateTime.Now.Year;
-            var nextMonth = DateTime.Now.AddMonths(1).Month;
-            var startDate = new DateTime(year, nextMonth, day: 1, hour: 10, minute: 00, second: 00);
-
-            var tournamentTypes = Enum.GetValues<TournamentType>();
-
-            for (int i = 0; i < tournamentTypes.Length; i++)
-            {
-                int count = i + 1;
-                tournaments.Add(new Tournament
-                {
-                    Title = $"Tournament {count}",
-                    StartDate = startDate,
-                    City = _faker.Address.City(),
-                    Country = _faker.Address.Country(),
-                    Type = tournamentTypes[i],
-                });
-            }
-
-            return tournaments;
         }
 
         public static int GetGameDuration(TournamentType type)

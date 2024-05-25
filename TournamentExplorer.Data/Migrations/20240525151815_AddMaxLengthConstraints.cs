@@ -5,7 +5,7 @@
 namespace TournamentExplorer.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class AddMaxLengthToProperties : Migration
+    public partial class AddMaxLengthConstraints : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -22,8 +22,8 @@ namespace TournamentExplorer.Data.Migrations
             migrationBuilder.AlterColumn<string>(
                 name: "Country",
                 table: "Tournament",
-                type: "nvarchar(50)",
-                maxLength: 50,
+                type: "nvarchar(100)",
+                maxLength: 100,
                 nullable: false,
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)");
@@ -31,8 +31,8 @@ namespace TournamentExplorer.Data.Migrations
             migrationBuilder.AlterColumn<string>(
                 name: "City",
                 table: "Tournament",
-                type: "nvarchar(50)",
-                maxLength: 50,
+                type: "nvarchar(100)",
+                maxLength: 100,
                 nullable: false,
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)");
@@ -65,8 +65,8 @@ namespace TournamentExplorer.Data.Migrations
                 type: "nvarchar(max)",
                 nullable: false,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(50)",
-                oldMaxLength: 50);
+                oldType: "nvarchar(100)",
+                oldMaxLength: 100);
 
             migrationBuilder.AlterColumn<string>(
                 name: "City",
@@ -74,8 +74,8 @@ namespace TournamentExplorer.Data.Migrations
                 type: "nvarchar(max)",
                 nullable: false,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(50)",
-                oldMaxLength: 50);
+                oldType: "nvarchar(100)",
+                oldMaxLength: 100);
 
             migrationBuilder.AlterColumn<string>(
                 name: "Name",
