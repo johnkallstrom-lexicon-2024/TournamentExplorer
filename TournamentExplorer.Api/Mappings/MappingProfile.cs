@@ -14,6 +14,7 @@ namespace TournamentExplorer.Api.Mappings
             CreateMap<TournamentUpdateDto, Tournament>().ReverseMap();
 
             CreateMap<Game, GameDto>();
+            CreateMap<Game, GameSlimDto>();
             CreateMap<GameCreateDto, Game>();
             CreateMap<GameUpdateDto, Game>().ReverseMap();
         }
