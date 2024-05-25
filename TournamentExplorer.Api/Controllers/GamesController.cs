@@ -22,9 +22,10 @@ namespace TournamentExplorer.Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<GameDto>> GetGames([FromQuery] QueryParams parameters)
+        public ActionResult<IEnumerable<GameDto>> GetGames([FromQuery] GameQueryParams parameters)
         {
-            var games = _unitOfWork.GameRepository.Get(parameters, g => g.Tournament);
+            var games = parameters.IncludeTournament ? 
+                _unitOfWork.GameRepository.Get(parameters, g => g.Tournament) : _unitOfWork.GameRepository.Get(parameters);
 
             return Ok(_mapper.Map<IEnumerable<GameDto>>(games));
         }
