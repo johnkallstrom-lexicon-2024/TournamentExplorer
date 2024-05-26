@@ -15,9 +15,9 @@ namespace TournamentExplorer.Data.Repositories
             _context = context;
         }
 
-        public IQueryable<Tournament> Get() => _context.Tournaments.AsNoTracking();
+        public IEnumerable<Tournament> Get() => _context.Tournaments.AsNoTracking();
 
-        public IQueryable<Tournament> Get(IQueryParams parameters)
+        public IEnumerable<Tournament> Get(IQueryParams parameters)
         {
             var tournaments = _context.Tournaments.AsQueryable();
 
@@ -54,10 +54,9 @@ namespace TournamentExplorer.Data.Repositories
             return tournaments;
         }
 
-        public IQueryable<Tournament> Get<TProperty>(IQueryParams parameters, Expression<Func<Tournament, TProperty>> navigationProperty)
+        public IEnumerable<Tournament> Get<TProperty>(IQueryParams parameters, Expression<Func<Tournament, TProperty>> navigationProperty)
         {
-            var tournaments = navigationProperty != null ? 
-                _context.Tournaments.Include(navigationProperty).AsQueryable() : _context.Tournaments.AsQueryable();
+            IQueryable<Tournament> tournaments = navigationProperty != null ? _context.Tournaments.Include(navigationProperty) : _context.Tournaments;
 
             if (!string.IsNullOrEmpty(parameters.SearchTerm))
             {

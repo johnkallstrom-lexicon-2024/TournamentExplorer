@@ -14,15 +14,26 @@ namespace TournamentExplorer.Data.Repositories
             _context = context;
         }
 
-        public IQueryable<Game> Get() => _context.Games.AsNoTracking();
+        public IEnumerable<Game> Get() => _context.Games.AsNoTracking();
 
-        public IQueryable<Game> Get(IQueryParams parameters)
+        public IEnumerable<Game> Get(IQueryParams parameters)
         {
-            var games = _context.Games.AsQueryable();
+            IQueryable<Game> games;
+
+            if (parameters.CurrentPage.HasValue && parameters.PageSize.HasValue)
+            {
+                games = _context.Games
+                    .Skip((parameters.CurrentPage.Value - 1) * parameters.PageSize.Value)
+                    .Take(parameters.PageSize.Value);
+            }
+            else
+            {
+                games = _context.Games;
+            }
 
             if (!string.IsNullOrEmpty(parameters.SearchTerm))
             {
-                games = games.Where(g => g.Name.Contains(parameters.SearchTerm) || g.Tournament.Title.Contains(parameters.SearchTerm));
+                games = games.Where(g => g.Name.Contains(parameters.SearchTerm));
             }
 
             if (!string.IsNullOrEmpty(parameters.SortBy) && !string.IsNullOrEmpty(parameters.SortOrder))
@@ -40,14 +51,19 @@ namespace TournamentExplorer.Data.Repositories
                 }
             }
 
-            return games;
+            return games.AsNoTracking();
         }
 
-        public IQueryable<Game> Get<TProperty>(IQueryParams parameters, Expression<Func<Game, TProperty>> navigationProperty)
+        public IEnumerable<Game> Get<TProperty>(IQueryParams parameters, Expression<Func<Game, TProperty>> navigationProperty)
         {
-            var games = navigationProperty != null ? _context.Games
-                .Include(navigationProperty)
-                .AsQueryable() : _context.Games.AsQueryable();
+            IQueryable<Game> games = navigationProperty != null ? _context.Games.Include(navigationProperty) : _context.Games;
+
+            if (parameters.CurrentPage.HasValue && parameters.PageSize.HasValue)
+            {
+                games = games
+                    .Skip((parameters.CurrentPage.Value - 1) * parameters.PageSize.Value)
+                    .Take(parameters.PageSize.Value);
+            }
 
             if (!string.IsNullOrEmpty(parameters.SearchTerm))
             {
@@ -69,7 +85,7 @@ namespace TournamentExplorer.Data.Repositories
                 }
             }
 
-            return games;
+            return games.AsNoTracking();
         }
 
         public async Task<Game?> GetByIdAsync(int id)
