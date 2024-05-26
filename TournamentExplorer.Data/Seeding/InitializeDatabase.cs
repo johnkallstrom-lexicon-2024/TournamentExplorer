@@ -13,7 +13,6 @@ namespace TournamentExplorer.Data.Seeding
         public static async Task SeedAsync(TournamentExplorerDbContext context)
         {
             var tournaments = _tournamentFaker.Generate(50);
-
             var games = GenerateGames(tournaments);
 
             if (tournaments != null && tournaments.Count() > 0)
@@ -39,10 +38,6 @@ namespace TournamentExplorer.Data.Seeding
 
                 for (int i = 1; i <= _faker.Random.Int(min: 5, max: 15); i++)
                 {
-                    var year = tournament.StartDate.Year;
-                    var month = tournament.StartDate.Month;
-                    var day = tournament.StartDate.AddDays(_faker.Random.Int(min: 1, max: 10)).Day;
-
                     games.Add(new Game
                     {
                         Name = $"Game {i}",

@@ -25,10 +25,19 @@ namespace TournamentExplorer.Data.Repositories
                 games = games.Where(g => g.Name.Contains(parameters.SearchTerm) || g.Tournament.Title.Contains(parameters.SearchTerm));
             }
 
-            if (!string.IsNullOrEmpty(parameters.SortOrder))
+            if (!string.IsNullOrEmpty(parameters.SortBy) && !string.IsNullOrEmpty(parameters.SortOrder))
             {
-                games = parameters.SortOrder.ToLower().Equals("asc") ? games.OrderBy(g => g.Id) : games;
-                games = parameters.SortOrder.ToLower().Equals("desc") ? games.OrderByDescending(g => g.Id) : games;
+                switch (parameters.SortBy)
+                {
+                    case "name":
+                        games = parameters.SortOrder.ToLower().Equals("asc") ? games.OrderBy(g => g.Name) : games;
+                        games = parameters.SortOrder.ToLower().Equals("desc") ? games.OrderByDescending(g => g.Name) : games;
+                        break;
+                    default:
+                        games = parameters.SortOrder.ToLower().Equals("asc") ? games.OrderBy(g => g.Id) : games;
+                        games = parameters.SortOrder.ToLower().Equals("desc") ? games.OrderByDescending(g => g.Id) : games;
+                        break;
+                }
             }
 
             return games;
@@ -45,10 +54,19 @@ namespace TournamentExplorer.Data.Repositories
                 games = games.Where(g => g.Name.Contains(parameters.SearchTerm) || g.Tournament.Title.Contains(parameters.SearchTerm));
             }
 
-            if (!string.IsNullOrEmpty(parameters.SortOrder))
+            if (!string.IsNullOrEmpty(parameters.SortBy) && !string.IsNullOrEmpty(parameters.SortOrder))
             {
-                games = parameters.SortOrder.ToLower().Equals("asc") ? games.OrderBy(g => g.Id) : games;
-                games = parameters.SortOrder.ToLower().Equals("desc") ? games.OrderByDescending(g => g.Id) : games;
+                switch (parameters.SortBy)
+                {
+                    case "name":
+                        games = parameters.SortOrder.ToLower().Equals("asc") ? games.OrderBy(g => g.Name) : games;
+                        games = parameters.SortOrder.ToLower().Equals("desc") ? games.OrderByDescending(g => g.Name) : games;
+                        break;
+                    default:
+                        games = parameters.SortOrder.ToLower().Equals("asc") ? games.OrderBy(g => g.Id) : games;
+                        games = parameters.SortOrder.ToLower().Equals("desc") ? games.OrderByDescending(g => g.Id) : games;
+                        break;
+                }
             }
 
             return games;
