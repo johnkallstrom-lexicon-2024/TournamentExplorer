@@ -4,7 +4,7 @@ using TournamentExplorer.Core.Enums;
 
 namespace TournamentExplorer.Api.Models
 {
-    public record TournamentSlimDto
+    public record TournamentWithoutRelationsDto
     {
         public string? Title { get; init; }
         public DateTime StartDate { get; init; }

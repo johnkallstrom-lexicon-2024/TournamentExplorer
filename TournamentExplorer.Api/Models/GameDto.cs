@@ -7,6 +7,6 @@
         public DateTime Time { get; init; }
         public int Duration { get; init; }
 
-        public TournamentSlimDto Tournament { get; init; } = default!;
+        public TournamentWithoutRelationsDto Tournament { get; init; } = default!;
     }
 }
